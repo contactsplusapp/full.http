@@ -1,6 +1,6 @@
 # full.http
 
-[![Clojars Project](https://img.shields.io/clojars/v/fullcontact/full.http.svg)](https://clojars.org/fullcontact/full.http)
+[//]: # ([![Clojars Project]&#40;https://img.shields.io/clojars/v/fullcontact/full.http.svg&#41;]&#40;https://clojars.org/fullcontact/full.http&#41;)
 
 Async HTTP client and server on top of http-kit and core.async
 
