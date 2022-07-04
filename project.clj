@@ -1,10 +1,16 @@
-(defproject fullcontact/full.http "1.0.9-SNAPSHOT"
+(defn artifactory [path]
+  {:url (str "https://contactsplus.jfrog.io/artifactory/" path)
+   :sign-releases false})
+
+(defproject fullcontact/full.http "1.0.9"
   :description "Async HTTP client and server on top of http-kit and core.async."
   :url "https://github.com/contactsplusapp/full.http"
   :license {:name "Eclipse Public License - v 1.0"
             :url "http://www.eclipse.org/legal/epl-v10.html"
             :distribution :repo}
-  :deploy-repositories [["releases" {:url "https://clojars.org/repo/" :creds :gpg}]]
+  :repositories [["fullcontact" ~(artifactory "repo")]
+                 ["releases" ~(artifactory "libs-release-local")]
+                 ["snapshots" ~(artifactory "libs-snapshot-local")]]
   :dependencies [[org.clojure/clojure "1.10.3"]
                  [javax.xml.bind/jaxb-api "2.4.0-b180830.0359"]
                  [org.clojure/core.async "0.7.559"]
