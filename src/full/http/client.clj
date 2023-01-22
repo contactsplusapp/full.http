@@ -2,6 +2,7 @@
   (:require [clojure.core.async :refer [go chan >! close! promise-chan]]
             [clojure.string :refer [upper-case]]
             [org.httpkit.client :as httpkit]
+            [org.httpkit.sni-client :as sni-client]
             [camelsnake.core :refer [->camelCase ->kebab-case-keyword]]
             [full.core.sugar :refer :all]
             [full.core.config :refer [opt]]
@@ -118,6 +119,9 @@
 
 ;;; REQUEST
 
+(defn set-sni-client []
+  (memoize (alter-var-root #'org.httpkit.client/*default-client* (fn [_] sni-client/default-client))))
+
 (defn req>
   "Performs asynchronous API request. Always returns result channel which will
   return either response or exception."
@@ -151,6 +155,8 @@
                (if-let [form-params (:form-params req)] (str "form-params:" form-params) "")
                (if-let [body (:body req)] (str "body:" body) "")
                (if-let [headers (:headers req)] (str "headers:" headers) ""))
+    ; Fix to issue with http-kit causing SSLException: Received fatal alert: handshake_failure
+    (set-sni-client)
     (httpkit/request req (partial process-response
                                   req
                                   full-url
