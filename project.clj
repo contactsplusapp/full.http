@@ -2,7 +2,7 @@
   {:url (str "https://contactsplus.jfrog.io/artifactory/" path)
    :sign-releases false})
 
-(defproject fullcontact/full.http "1.0.10"
+(defproject fullcontact/full.http "1.0.11"
   :description "Async HTTP client and server on top of http-kit and core.async."
   :url "https://github.com/contactsplusapp/full.http"
   :license {:name "Eclipse Public License - v 1.0"
@@ -19,11 +19,10 @@
                  [javax.servlet/servlet-api "2.5"]
                  [ring-cors "0.1.7"]
                  [fullcontact/camelsnake "0.9.0"]
-                 [fullcontact/full.json "0.10.2"]
-                 [fullcontact/full.metrics "0.11.4"]
-                 [fullcontact/full.async "0.9.0"]
-                 [fullcontact/full.core "0.10.1"]]
-  :aot :all
+                 [fullcontact/full.json "0.10.3"]
+                 [fullcontact/full.metrics "0.13.1"]
+                 [fullcontact/full.async "1.1.1"]
+                 [fullcontact/full.core "1.1.3"]]
   :release-tasks [["vcs" "assert-committed"]
                   ["change" "version" "leiningen.release/bump-version" "release"]
                   ["vcs" "commit"]
